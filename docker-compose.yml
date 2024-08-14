@@ -1,0 +1,28 @@
+services:
+  server:
+    build:
+      context: ./server
+    ports:
+      - "9999:9999"
+    networks:
+      - game-network
+
+  client1:
+    build:
+      context: ./client
+    networks:
+      - game-network
+    stdin_open: true  # Mantém o container aberto para entrada interativa
+    tty: true         # Aloca um pseudo-terminal
+
+  client2:
+    build:
+      context: ./client
+    networks:
+      - game-network
+    stdin_open: true  # Mantém o container aberto para entrada interativa
+    tty: true         # Aloca um pseudo-terminal
+
+networks:
+  game-network:
+    driver: bridge
